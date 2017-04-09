@@ -1,22 +1,36 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-struct scoreRecord {
+public struct scoreRecord {
     public String firstName;
     public String lastName;
     public int score;
 }
 
 namespace SortingScores {
+
+    /**
+     * SortingRecords reads a file that contains a list of names and scores,
+     * and saves the sorted version of the list into another file.
+     * 
+     * Author: Toni Lam
+     * Date: 10 April 2017
+     */
     class SortingRecords {
         
         static char[] delimiterChars = { ',' };
 
+        /**
+         * Main function controls the whole process flow of this application.
+         * Pre-condition:
+         *      args is a list of string
+         * Post-condition:
+         *      A sorted score list is saved in the same folder of this application.
+         */
         static void Main(string[] args) {
             ArrayList scoreList = new ArrayList();
 
@@ -24,6 +38,18 @@ namespace SortingScores {
                 String inFile = args[0];
                 if (File.Exists(inFile)) {
                     scoreList = loadScoresFromFile(inFile);
+                    scoreList.Sort(new ScoreComparer());
+                    Console.WriteLine();
+                    foreach (scoreRecord item in scoreList) {
+                        String output = String.Format(
+                                                         "{0}, {1}, {2:D}",
+                                                         item.firstName,
+                                                         item.lastName,
+                                                         item.score
+                                                       );
+                        Console.WriteLine(output);
+                    }
+
                 } else {
                     alertNoFile();
                 }
@@ -32,7 +58,7 @@ namespace SortingScores {
             }
         }
 
-        private static ArrayList loadScoresFromFile(string filename) {
+        static private ArrayList loadScoresFromFile(string filename) {
             ArrayList scoreList = new ArrayList();
             scoreRecord record;
             string line;
