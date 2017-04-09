@@ -67,15 +67,6 @@ namespace SortingScores {
                         }
                     }
                 }
-                foreach(scoreRecord item in scoreList) {
-                    String output = String.Format(
-                                                     "{0}, {1}, {2:D}",
-                                                     item.firstName,
-                                                     item.lastName,
-                                                     item.score
-                                                   );
-                    Console.WriteLine(output);
-                }
             } catch (Exception e) {
                 Console.WriteLine("There is an error while reading the file.");
                 Console.WriteLine(e.Message);
@@ -90,13 +81,14 @@ namespace SortingScores {
 
             using (StreamWriter sw = new StreamWriter(newFileName)) {
                 foreach (scoreRecord item in scoreList) {
-                    String newLine = String.Format(
-                                                     "{0}, {1}, {2:D}",
-                                                     item.firstName,
-                                                     item.lastName,
-                                                     item.score
-                                                   );
-                    sw.WriteLine(newLine);
+                    String output = String.Format(
+                                                         "{0}, {1}, {2:D}",
+                                                         item.firstName,
+                                                         item.lastName,
+                                                         item.score
+                                                       );
+                    Console.WriteLine(output);
+                    sw.WriteLine(output);
                 }
             }
 
