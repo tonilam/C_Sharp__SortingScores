@@ -39,17 +39,7 @@ namespace SortingScores {
                 if (File.Exists(inFile)) {
                     scoreList = loadScoresFromFile(inFile);
                     scoreList.Sort(new ScoreComparer());
-                    Console.WriteLine();
-                    foreach (scoreRecord item in scoreList) {
-                        String output = String.Format(
-                                                         "{0}, {1}, {2:D}",
-                                                         item.firstName,
-                                                         item.lastName,
-                                                         item.score
-                                                       );
-                        Console.WriteLine(output);
-                    }
-
+                    SaveScoresToFile(scoreList, inFile);
                 } else {
                     alertNoFile();
                 }
@@ -57,7 +47,7 @@ namespace SortingScores {
                 alertErrorArgs();
             }
         }
-
+        
         static private ArrayList loadScoresFromFile(string filename) {
             ArrayList scoreList = new ArrayList();
             scoreRecord record;
@@ -92,6 +82,25 @@ namespace SortingScores {
             }
 
             return scoreList;
+        }
+
+        private static void SaveScoresToFile(ArrayList scoreList, string filename) {
+            String[] fileToken = filename.Split('.');
+            String newFileName = fileToken[0] + "-graded" + '.' + fileToken[1];
+
+            using (StreamWriter sw = new StreamWriter(newFileName)) {
+                foreach (scoreRecord item in scoreList) {
+                    String newLine = String.Format(
+                                                     "{0}, {1}, {2:D}",
+                                                     item.firstName,
+                                                     item.lastName,
+                                                     item.score
+                                                   );
+                    sw.WriteLine(newLine);
+                }
+            }
+
+            Console.WriteLine("Finished: created " + newFileName);
         }
 
         static private void alertErrorArgs() {
