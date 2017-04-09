@@ -7,8 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SortingScores.Tests {
+    /**
+     * ScoreComparerTests is a unit test class to test all public methods in the
+     * namespace SortingScores.
+     * 
+     * Author: Toni Lam
+     * Date: 10 April 2017
+     */
     [TestClass()]
     public class ScoreComparerTests {
+
+        /**
+         * To test if the compare method from ScoreComparer can return the correct
+         * value.
+         */
         [TestMethod()]
         public void CompareTest() {
             ScoreComparer sc = new ScoreComparer();
