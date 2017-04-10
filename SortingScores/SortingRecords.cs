@@ -73,8 +73,8 @@ namespace SortingScores {
                      */
                     while ((line = sr.ReadLine()) != null) {
                         columns = line.Split(delimiterChars);
-                        record.firstName = columns[0].Trim();
-                        record.lastName = columns[1].Trim();
+                        record.lastName = columns[0].Trim();
+                        record.firstName = columns[1].Trim();
                         if (Int32.TryParse(columns[2], out record.score)) {
                             scoreList.Add(record);
                         } else {
@@ -111,8 +111,8 @@ namespace SortingScores {
                 foreach (scoreRecord item in scoreList) {
                     String output = String.Format(
                                                          "{0}, {1}, {2:D}",
-                                                         item.firstName,
                                                          item.lastName,
+                                                         item.firstName,
                                                          item.score
                                                        );
                     Console.WriteLine(output);

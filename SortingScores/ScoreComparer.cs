@@ -32,12 +32,15 @@ namespace SortingScores {
                     if (r2.firstName == r1.firstName) {
                         return 0;
                     } else {
-                        return String.Compare(r2.firstName, r1.firstName, StringComparison.OrdinalIgnoreCase);
+                        // second object has higher position if its name is in smaller alphabetical order
+                        return String.Compare(r1.firstName, r2.firstName, StringComparison.OrdinalIgnoreCase);
                     }
                 } else {
-                    return String.Compare(r2.lastName, r1.lastName, StringComparison.OrdinalIgnoreCase);
+                    // second object has higher position if its name is in smaller alphabetical order
+                    return String.Compare(r1.lastName, r2.lastName, StringComparison.OrdinalIgnoreCase);
                 }
             } else {
+                // second object has higher position if its score is higher
                 return (r2.score > r1.score) ? 1 : -1;
             }
         }
